@@ -1,0 +1,1266 @@
+violations <- function(votes.tot,statistic){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/9#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m),d.statistic=sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+print.benfords <- function(votes.tot,statistic){#
+	z <- violations(votes.tot,statistic)#
+	if(z[["m.statistic"]]>=0.851){#
+		cat(z[["m.statistic"]],"*",sep="")#
+	}else{#
+		if(z[["m.statistic"]]>=0.967){#
+		cat(z[["m.statistic"]],"**",sep="")#
+	}else{#
+		if(z[["m.statistic"]]>=1.212){#
+		cat(z[["m.statistic"]],"***",sep="")#
+		}else{#
+		}#
+	}#
+	}#
+	if(z[["d.statistic"]]>=1.212){#
+		cat(z[["d.statistic"]],"*",sep="")#
+	}else{#
+		if(z[["d.statistic"]]>=1.330){#
+		cat(z[["d.statistic"]],"**",sep="")#
+	}else{#
+		if(z[["d.statistic"]]>=1.569){#
+		cat(z[["d.statistic"]],"***",sep="")#
+	}#
+	}#
+	}#
+	z$signif.level <- c("0.10*","0.05**","0.01***")#
+	return(z[-1])	#
+}
+print.benfords(c(100,200,300),"both")
+print.benfords(c(100,200,300),"Leemis")
+print.benfords(c(100,200,300),"Cho-Gains")
+violations <- function(votes.tot,statistic){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/9#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m),d.statistic=sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+violations(c(100,200,300),"both")
+violations(c(100,200,300),"Lewis")
+violations(c(100,200,300),"Leemis")
+violations(c(100,200,300),"Cho-Gains")
+print.benfords <- function(votes.tot,statistic){#
+	z <- violations(votes.tot,statistic)#
+	if(z[["m.statistic"]]>=0.851){#
+		cat(z[["m.statistic"]],"*",sep="")#
+	}else{#
+		if(z[["m.statistic"]]>=0.967){#
+		cat(z[["m.statistic"]],"**",sep="")#
+	}else{#
+		if(z[["m.statistic"]]>=1.212){#
+		cat(z[["m.statistic"]],"***",sep="")#
+		}else{#
+		}#
+	}#
+	}#
+	if(z[["d.statistic"]]>=1.212){#
+		cat(z[["d.statistic"]],"*",sep="")#
+	}else{#
+		if(z[["d.statistic"]]>=1.330){#
+		cat(z[["d.statistic"]],"**",sep="")#
+	}else{#
+		if(z[["d.statistic"]]>=1.569){#
+		cat(z[["d.statistic"]],"***",sep="")#
+	}#
+	}#
+	}#
+	z$signif.level <- c("0.10*","0.05**","0.01***")#
+	return(z[-1])	#
+}
+print.benfords(violations(c(100,200,300),"both"))
+z <- violations(votes.tot,statistic)
+violations <- function(votes.tot,statistic){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/9#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m),d.statistic=sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+print.benfords <- function(votes.tot,statistic){#
+	z <- violations(votes.tot,statistic)#
+	if(z[["m.statistic"]]>=0.851){#
+		cat(z[["m.statistic"]],"*",sep="")#
+	}else{#
+		if(z[["m.statistic"]]>=0.967){#
+		cat(z[["m.statistic"]],"**",sep="")#
+	}else{#
+		if(z[["m.statistic"]]>=1.212){#
+		cat(z[["m.statistic"]],"***",sep="")#
+		}else{#
+		}#
+	}#
+	}#
+	if(z[["d.statistic"]]>=1.212){#
+		cat(z[["d.statistic"]],"*",sep="")#
+	}else{#
+		if(z[["d.statistic"]]>=1.330){#
+		cat(z[["d.statistic"]],"**",sep="")#
+	}else{#
+		if(z[["d.statistic"]]>=1.569){#
+		cat(z[["d.statistic"]],"***",sep="")#
+	}#
+	}#
+	}#
+	z$signif.level <- c("0.10*","0.05**","0.01***")#
+	return(z[-1])	#
+}
+print.benfords(violations(c(100,200,300),"both"))
+print.benfords(c(100,200,300),"both")
+print.benfords <- function(votes.tot,statistic){
+violations <- function(votes.tot,statistic="both"){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/9#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m),d.statistic=sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+print.benfords <- function(votes.tot,statistic){#
+	z <- violations(votes.tot)#
+	if(z[["m.statistic"]]>=0.851){#
+		cat(z[["m.statistic"]],"*",sep="")#
+	}else{#
+		if(z[["m.statistic"]]>=0.967){#
+		cat(z[["m.statistic"]],"**",sep="")#
+	}else{#
+		if(z[["m.statistic"]]>=1.212){#
+		cat(z[["m.statistic"]],"***",sep="")#
+		}else{#
+		}#
+	}#
+	}#
+	if(z[["d.statistic"]]>=1.212){#
+		cat(z[["d.statistic"]],"*",sep="")#
+	}else{#
+		if(z[["d.statistic"]]>=1.330){#
+		cat(z[["d.statistic"]],"**",sep="")#
+	}else{#
+		if(z[["d.statistic"]]>=1.569){#
+		cat(z[["d.statistic"]],"***",sep="")#
+	}#
+	}#
+	}#
+	z$signif.level <- c("0.10*","0.05**","0.01***")#
+	return(z[-1])	#
+}
+print.benfords(c(100,200,300),"both")
+print.benfords(c(100,200,300),"Leemis")
+print.benfords(c(100,200,300))
+violations <- function(votes.tot,statistic="both"){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/9#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m),d.statistic=sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}#
+#
+#2#
+print.benfords <- function(votes.tot,statistic){#
+	z <- violations(votes.tot)#
+	if(z[["m.statistic"]]>=0.851){#
+		cat(z[["m.statistic"]],"*",sep="")#
+	}else{#
+		if(z[["m.statistic"]]>=0.967){#
+		cat(z[["m.statistic"]],"**",sep="")#
+	}else{#
+		if(z[["m.statistic"]]>=1.212){#
+		cat(z[["m.statistic"]],"***",sep="")#
+		}else{#
+		}#
+	}#
+	}#
+	if(z[["d.statistic"]]>=1.212){#
+		cat(z[["d.statistic"]],"*",sep="")#
+	}else{#
+		if(z[["d.statistic"]]>=1.330){#
+		cat(z[["d.statistic"]],"**",sep="")#
+	}else{#
+		if(z[["d.statistic"]]>=1.569){#
+		cat(z[["d.statistic"]],"***",sep="")#
+	}#
+	}#
+	}#
+	z$signif.level <- c("0.10*","0.05**","0.01***")#
+	return(z[-1])	#
+}
+print.benfords(c(100,200,300))
+1) calculating violations
+option "b" for both Leemis' m statistic and Cho-Gains' d
+1) calculating violations#
+## option "b" for both Leemis' m statistic and Cho-Gains' d#
+## option "m" for Leemis' m statistic only#
+## option "d" for Cho-Gains' d only#
+## default is "b".#
+benford <- function(x, print="b"){#
+  firstdigit <- as.numeric(substr(x,1,1)) #
+  # extracting the first digit from every numbers#
+  distribution <- c(firstdigit, c(1:9)) #
+  # It is not guaranteed that every digit will be included#
+  # in this vector. So, we add each digit once to this vector.#
+  distribution <- (table(distribution)-1)#
+  # Making a table of the full digit distribution#
+  # By making a table, we know how many times does each digit shows as the first digit.#
+  # To do this, we need to subtract 1 from the total numbers shown as the first digit for#
+  # each digit because we added them to make columns for each digit.  #
+  Xi <- (distribution/sum(distribution)) #
+  # Calculating Xi for i={1,2,...,9}#
+  i <- c(1:9)  #
+  # setting as a numeric vector of numbers from 1 to 9.#
+  m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))  # calculating Leemis' m#
+  d <- sqrt(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))  # calculating Cho-Gains' d#
+  output <- list("Leemis' m"=m, "Cho-Gains' d"=d, "The Full Digit Distribution"=distribution)#
+  # making a list consist of Leemis'm, Cho-Gains' d, and the full digit distribution#
+  if(print=="b"){return(output)} # print the results according to the option#
+  else{if(print=="m"){#
+    return(output[-2])}#
+       else{if(print=="d"){#
+         return(output[-1])#
+       } else {cat("Please input a valid option.")}#
+       }#
+  }#
+}#
+#
+## 2) Critical Values#
+print.benfords <- function(x){#
+  firstdigit <- as.numeric(substr(x,1,1)) #
+  distribution <- c(firstdigit, c(1:9)) #
+  distribution <- (table(distribution)-1)#
+  Xi <- (distribution/sum(distribution)) #
+  i <- c(1:9)  #
+  m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))#
+  d <- sqrt(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))#
+  # the above code is the same as the previous function code except the code regarding printing#
+  crit.m <- c(m <= 0.851, m>0.851 & m<=0.967, m> 0.967 & m<=1.212, m>1.212 )#
+  crit.d <- c(d<= 1.121, d>1.121 & d<=1.330, d> 1.330 & d<=1.569, d>1.569 )#
+  # making boolean vector for identifying the critical values for m and d#
+  asterisk <- (c(" ", "*", "**", "***"))#
+  # making a vector of asterisks showing significance level#
+  output <- matrix(c(m, d, asterisk[crit.m==TRUE],  asterisk[crit.d==TRUE]),2,2)  #
+  rownames(output) <- c("Leemis' m","Cho-Gains' d")#
+  colnames(output) <- c("Test Statistics","Signif. Level")#
+  # making a matrix which shows the name of each statistic, statistic as it was calculated,#
+  # and the relevant number of asterisk's. #
+  # If the boolean value of 'crit.m(crit.d)' is TRUE, then the corresponding element of 'asterisk'#
+  # will be shown in the matrix. #
+  cat("Benford's law test to reject the null hypothesis of no fraud")#
+  cat("\n")#
+  cat("\n")#
+  print(output, quote=FALSE)#
+  cat("\n")#
+  cat("Significant Level: *** alpha<0.01, ** alpha<0.05, * alpha<0.10")#
+  # print the output without quotation mark, and print a legend explaining the asterisk's.#
+  statistics <- matrix(as.numeric(output[,1]),2,1)#
+  rownames(statistics) <- c("Leemis' m", "Cho-Gains' d")#
+  colnames(statistics) <- c("Test Statistics")#
+  invisible(statistics)#
+  # invisibly returning the matrix of the each statistics for further calculation.#
+  }#
+#
+## 3) Testing#
+test.benfords <- function(){#
+  benford <- function(x, print="b"){#
+    firstdigit <- as.numeric(substr(x,1,1)) #
+    distribution <- c(firstdigit, c(1:9)) #
+    distribution <- (table(distribution)-1)#
+    Xi <- (distribution/sum(distribution)) #
+    i <- c(1:9)  #
+    m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))   #
+    d <- sqrt(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))    #
+    output <- list("Leemis' m"=m, "Cho-Gains' d"=d, "The Full Digit Distribution"=distribution)#
+    if(print=="b"){return(output)} #
+    else{if(print=="m"){#
+      return(output[-2])}#
+         else{if(print=="d"){#
+           return(output[-1])#
+         } else {cat("Please input a valid option.")}#
+         }#
+    }#
+  }#
+  # sub-funtion('benford') from problem 1.#
+  # It is not necessary to insert a 'print.benfords' function here because the function#
+  # has the same codes for calculating statistics and distribution as 'benford' function.#
+distribution.1 <- round(log10(1+1/c(1:9))*1000,0) #
+    # making a distribution according to Benford's law#
+dataset.1 <- rep(seq(10,90,by=10),distribution.1) #
+    # making a dataset 1 where Benford's law is met#
+m.1 <- sqrt(sum(distribution.1))*max(abs(distribution.1/sum(distribution.1)-log10(1+1/c(1:9))))#
+    # Calculating Leemis' m for dataset 1#
+d.1 <- sqrt(sum(distribution.1))*sqrt(sum((distribution.1/sum(distribution.1)-log10(1+1/c(1:9)))^2))#
+    # Calculating Cho-Gains' d for dataset 1#
+distribution.2 <- rep(c(112,111), c(1,8)) #
+    # making a distribution where Benford's law is not met#
+dataset.2 <- rep(seq(10,90,by=10),distribution.2) #
+    # making a dataset 2 where Benford's law is not met#
+m.2 <- sqrt(sum(distribution.2))*max(abs(distribution.2/sum(distribution.2)-log10(1+1/c(1:9))))#
+    # Calculating Leemis' m for dataset 2#
+d.2 <- sqrt(sum(distribution.2))*sqrt(sum((distribution.2/sum(distribution.2)-log10(1+1/c(1:9)))^2))#
+    # Calculating Cho-Gains' d for dataset 2#
+result.1 <- benford(dataset.1)    #
+test.1 <- c(m=result.1[[1]]==m.1, d=result.1[[2]]==d.1, distribution=sum(result.1[[3]]==distribution.1)==9)#
+    # comparing the truth for the digit distributions and two test statistics to the results #
+    # from 'benford' fucntion for dataset 1.#
+result.2 <- benford(dataset.2)#
+test.2 <- c(m=result.2[[1]]==m.2, d=result.2[[2]]==d.2, distribution=sum(result.2[[3]]==distribution.2)==9)#
+    # comparing the truth for the digit distributions and two test statistics to the results #
+    # from 'benford' fucntion for dataset 2.#
+test <- c(test.1, test.2)#
+    # merging two boolean vectors.#
+which.statistic <- rep(c("m","d","distribution"),2)#
+which.data <- rep(c("dataset 1","dataset 2"), c(3,3))#
+    # making vectors of the message which will be printed according to the value of#
+    # the boolean vector 'test'. #
+#
+if(FALSE %in% test){#
+  paste("FALSE: The function calculates the wrong", which.statistic[test==FALSE],"for", which.data[test==FALSE])#
+}#
+  else{cat("TRUE")}#
+  # printing TRUE if all unit tests are passed, and printing FALSE if all unit test are not passed.#
+  # In case of FALSE, it will show where the function is broken.#
+}
+benford(c(1,1,1,1,2,3,4,5))
+print.benford(c(1,1,1,1,2,3,4,5))
+print.benfords(c(1,1,1,1,2,3,4,5))
+print.benfords(c(1,1,1,1,1,1,1,1,1,1))
+test.benfords(c(1,1,1,1,1))
+test.benfords()
+benford(c(1,1,1,1,2,3,4,5),b)
+benford(c(1,1,1,1,2,3,4,5),"b")
+benford(c(1,1,1,1,2,3,4,5),"m")
+benford(c(1,1,1,1,2,3,4,5),"d")
+violations <- function(votes.tot,statistic="both"){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/9#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m),d.statistic=sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+z
+z <- violations(c(1,2,3,4),"both")
+z
+z[["m.statistic"]]<-c(z[["m.statistic"]],"*")
+z
+?paste
+z[["m.statistic"]]<-paste(z[["m.statistic"]],"*", sep="")
+z
+violations <- function(votes.tot,statistic="both"){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/9#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m),d.statistic=sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+violations <- function(votes.tot,statistic){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/9#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m),d.statistic=sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- prop.freq[i]-log10(1+(1/i))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+violations(c(100,200,300),"both")
+violations <- function(votes.tot,statistic){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/length(votes.tot)#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot)*max(m),d.statistic=sqrt(length(votes.tot))*sqrt(sum(d))))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot)*max(m)))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+violations(c(100,200,300),"both")
+violations(c(100,200,300),"Leemis")
+violations(c(100,200,300),"Cho-Gains")
+violations <- function(votes.tot,statistic){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/length(votes.tot)#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m),d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot)*max(m)))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+violations(c(100,200,300),"both")
+violations(c(100,200,300),"Leemis")
+violations(c(100,200,300),"Cho-Gains")
+violations <- function(votes.tot,statistic){#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/length(votes.tot)#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m),d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+violations(c(100,200,300),"both")
+violations(c(100,200,300),"Leemis")
+violations(c(100,200,300),"Cho-Gains")
+benford <- function(x, print="b"){#
+  firstdigit <- as.numeric(substr(x,1,1)) #
+  # extracting the first digit from every numbers#
+  distribution <- c(firstdigit, c(1:9)) #
+  # It is not guaranteed that every digit will be included#
+  # in this vector. So, we add each digit once to this vector.#
+  distribution <- (table(distribution)-1)#
+  # Making a table of the full digit distribution#
+  # By making a table, we know how many times does each digit shows as the first digit.#
+  # To do this, we need to subtract 1 from the total numbers shown as the first digit for#
+  # each digit because we added them to make columns for each digit.  #
+  Xi <- (distribution/sum(distribution)) #
+  # Calculating Xi for i={1,2,...,9}#
+  i <- c(1:9)  #
+  # setting as a numeric vector of numbers from 1 to 9.#
+  m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))  # calculating Leemis' m#
+  d <- sqrt(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))  # calculating Cho-Gains' d#
+  output <- list("Leemis' m"=m, "Cho-Gains' d"=d, "The Full Digit Distribution"=distribution)#
+  # making a list consist of Leemis'm, Cho-Gains' d, and the full digit distribution#
+  if(print=="b"){return(output)} # print the results according to the option#
+  else{if(print=="m"){#
+    return(output[-2])}#
+       else{if(print=="d"){#
+         return(output[-1])#
+       } else {cat("Please input a valid option.")}#
+       }#
+  }#
+}
+benford(c(100,200,300))
+violations <- function(votes.tot,statistic){#
+	#Argument "votes.tot" takes in a vector or matrix of observed vote totals#
+	#Argument "statistic" specifies the statistic you want to calculate as we will see below#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/length(votes.tot)#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m),d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+violations(c(100,200,300),"both")
+violations(c(100,200,300),"Leemis")
+violations(c(100,200,300),"Cho-Gains")
+benford <- function(x, print="b"){#
+  firstdigit <- as.numeric(substr(x,1,1)) #
+  # extracting the first digit from every numbers#
+  distribution <- c(firstdigit, c(1:9)) #
+  # It is not guaranteed that every digit will be included#
+  # in this vector. So, we add each digit once to this vector.#
+  distribution <- (table(distribution)-1)#
+  # Making a table of the full digit distribution#
+  # By making a table, we know how many times does each digit shows as the first digit.#
+  # To do this, we need to subtract 1 from the total numbers shown as the first digit for#
+  # each digit because we added them to make columns for each digit.  #
+  Xi <- (distribution/sum(distribution)) #
+  # Calculating Xi for i={1,2,...,9}#
+  i <- c(1:9)  #
+  # setting as a numeric vector of numbers from 1 to 9.#
+  m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))  # calculating Leemis' m#
+  d <- sqrt(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))  # calculating Cho-Gains' d#
+  output <- list("Leemis' m"=m, "Cho-Gains' d"=d, "The Full Digit Distribution"=distribution)#
+  # making a list consist of Leemis'm, Cho-Gains' d, and the full digit distribution#
+  if(print=="b"){return(output)} # print the results according to the option#
+  else{if(print=="m"){#
+    return(output[-2])}#
+       else{if(print=="d"){#
+         return(output[-1])#
+       } else {cat("Please input a valid option.")}#
+       }#
+  }#
+}
+firstdigit <- as.numeric(substr(x,1,1))
+firstdigit <- as.numeric(substr(c(100,200,300),1,1))
+distribution <- c(firstdigit, c(1:9))
+distribution <- (table(distribution)-1)
+distribution
+Xi <- (distribution/sum(distribution))
+Xi
+i <- c(1:9)
+m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))
+crit.m <- c(m <= 0.851, m>0.851 & m<=0.967, m> 0.967 & m<=1.212, m>1.212 )
+crit.m
+asterisk <- (c(" ", "*", "**", "***"))
+asterisk
+asterisk[crit.m==TRUE]
+crit.m==TRUE
+violations <- function(votes.tot,statistic){#
+	#Argument "votes.tot" takes in a vector or matrix of observed vote totals#
+	#Argument "statistic" specifies the statistic you want to calculate as we will see below#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/length(votes.tot)#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m),d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}
+violations(c(100,200,300,200),"both")
+as.matrix(violations(c(100,200,300,200),"both"))
+as.matrix(violations(c(100,200,300,200),"both"))[-1]
+as.matrix(violations(c(100,200,300,200),"both")[-1])
+z <- as.matrix(violations(c(100,200,300,200),"both")[-1])
+z
+colnames(z)
+colname(z)
+colnames(z) <- "value"
+z
+z <- cbind(z,"Signif")
+z
+z <- cbind(z)
+z
+z <- cbind(z,Signif=numeric(2))
+z
+z <- cbind(z,Signif)
+z <- cbind(z,Signif=)
+z[1,1]
+z[2,1]
+class(z)
+z[[2,1]]
+z[2,1]==0.7
+z[2,1]==0.7781458
+z[2,1]=="0.7781458"
+z[[2,1]]=="0.7781458"
+z[[2,1]]==0.7781458
+z
+str(z)
+stat.value <- violations(c(100,200,300),"both")[-1]
+stat.value
+stat.value$signif.level <- c(0.10*,0.05**,0.01***)
+stat.value$signif.level <- c(0.10"*",0.05"**",0.01"***")
+stat.value$signif.level <- c("0.10*","0.05**","0.01***")
+stat.value
+stat.list <- violations(c(100,200,300),"both")[-1]
+stat.list
+stat.table <- as.matrix(stat.value)
+stat.table
+stat.table <- as.matrix(stat.list)
+stat.table
+colnames(stat.table) <- "Value"
+stat.table
+violations(c(100,200,300),"Leemis")
+as.matrix(violations(c(100,200,300),"Leemis"))
+as.matrix(violations(c(100,200,300),"Leemis"))[-1]
+as.matrix(violations(c(100,200,300),"Leemis")[-1])
+stat.list <- violations(c(100,200,300),"both")[-1]
+stat.list
+stat.table <- as.matrix(stat.list)
+stat.table
+colnames(stat.table) <- "Value"
+stat.table
+stat.table[1,1] <- paste(stat.table[1,1],*)
+stat.table[1,1] <- paste(stat.table[1,1],"*")
+stat.table
+stat.table$Signif
+stat.table
+stat.table <- cbind(stat.table,signif)
+stat.table
+stat.table[1,2] <- *
+stat.table[1,2] <- "*"
+stat.table
+output <- c(stat.table, c("0.10*","0.05**","0.01***"))
+output
+stat.table
+output <- c(stat.table,c(1,2,3))
+output
+print.benfords <- function(x){#
+  firstdigit <- as.numeric(substr(x,1,1)) #
+  distribution <- c(firstdigit, c(1:9)) #
+  distribution <- (table(distribution)-1)#
+  Xi <- (distribution/sum(distribution)) #
+  i <- c(1:9)  #
+  m <- sqrt(length(firstdigit))*max(abs((Xi-log10(1+1/i))))#
+  d <- sqrt(length(firstdigit))*sqrt(sum((Xi-log10(1+1/i))^2))#
+  # the above code is the same as the previous function code except the code regarding printing#
+  crit.m <- c(m <= 0.851, m>0.851 & m<=0.967, m> 0.967 & m<=1.212, m>1.212 )#
+  crit.d <- c(d<= 1.121, d>1.121 & d<=1.330, d> 1.330 & d<=1.569, d>1.569 )#
+  # making boolean vector for identifying the critical values for m and d#
+  asterisk <- (c(" ", "*", "**", "***"))#
+  # making a vector of asterisks showing significance level#
+  output <- matrix(c(m, d, asterisk[crit.m==TRUE],  asterisk[crit.d==TRUE]),2,2)  #
+  rownames(output) <- c("Leemis' m","Cho-Gains' d")#
+  colnames(output) <- c("Test Statistics","Signif. Level")#
+  # making a matrix which shows the name of each statistic, statistic as it was calculated,#
+  # and the relevant number of asterisk's. #
+  # If the boolean value of 'crit.m(crit.d)' is TRUE, then the corresponding element of 'asterisk'#
+  # will be shown in the matrix. #
+  cat("Benford's law test to reject the null hypothesis of no fraud")#
+  cat("\n")#
+  cat("\n")#
+  print(output, quote=FALSE)#
+  cat("\n")#
+  cat("Significant Level: *** alpha<0.01, ** alpha<0.05, * alpha<0.10")#
+  # print the output without quotation mark, and print a legend explaining the asterisk's.#
+  statistics <- matrix(as.numeric(output[,1]),2,1)#
+  rownames(statistics) <- c("Leemis' m", "Cho-Gains' d")#
+  colnames(statistics) <- c("Test Statistics")#
+  invisible(statistics)#
+  # invisibly returning the matrix of the each statistics for further calculation.#
+  }
+print.benfords(c(100,200,300),"b")
+print.benfords(c(100,200,300),)
+print.benfords(c(100,200,300))
+print.benfords <- function(votes.tot,"both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	stat.table <- cbind(stat.table,Signif)#
+	return(stat.table)#
+	cat("0.10*,0.05**,0.01***")#
+}
+print.benfords <- function(votes.tot,"both"){
+print.benfords <- function(votes.tot,statistic="both"){
+stat.list <- violations(votes.tot,"both")[-1]
+stat.table <- as.matrix(stat.list)
+colnames(stat.table) <- "Value"
+stat.table <- cbind(stat.table,Signif)
+return(stat.table)
+cat("0.10*,0.05**,0.01***")
+}
+print.benfords(c(100,200,300))
+print.benfords(c(100,200,300),"both")
+print.benfords <- function(votes.tot,statistic="both"){
+stat.list <- violations(votes.tot,"both")[-1]
+stat.table <- as.matrix(stat.list)
+colnames(stat.table) <- "Value"
+stat.table <- cbind(stat.table,Signif=c(1,2))
+return(stat.table)
+cat("0.10*,0.05**,0.01***")
+}
+print.benfords(c(100,200,300))
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	stat.table <- cbind(stat.table,Signif=c(1,2))#
+	print(stat.table)#
+	cat("0.10*,0.05**,0.01***")#
+}
+print.benfords(c(100,200,300))
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	stat.table <- cbind(stat.table,Signif.level=c(1,2))#
+	print(stat.table)#
+	cat("\n")#
+	cat("Significance level: 0.10*,0.05**,0.01***")#
+}
+print.benfords(c(100,200,300))
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	stat.table <- cbind(stat.table,Signif.level=c(1,2))#
+	print(stat.table)#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(100,200,300))
+print.benfords(c(100,200,300),"both")
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	stat.table <- cbind(stat.table,Signif.level=numeric(0))#
+	print(stat.table)#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(100,200,300),"both")
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	stat.table <- cbind(stat.table,Signif.level)#
+	print(stat.table)#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(100,200,300),"both")
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	stat.table <- cbind(stat.table,Signif.level=)#
+	print(stat.table)#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(100,200,300),"both")
+crit.m <- c(m <= 0.851, m>0.851 & m<=0.967, m> 0.967 & m<=1.212, m>1.212 )
+crit.m
+crit.m==TRUE
+asterisk <- (c(" ", "*", "**", "***"))
+asterisk[crit.m==TRUE]
+m <- c(stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212)
+m
+m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212)
+m
+d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569)
+d
+stars <- c("","*","**","***")
+stars
+stars <- c(,*,**,***)
+stars <- c("","*","**","***")
+stars
+stars[1]
+stars[4]
+stars[m==TRUE]
+stars[m==FALSE]
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212)#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569)#
+	stars <- c("","*","**","***")#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE])#
+	stat.table <- cbind(stat.table,Signif.level)#
+	print(stat.table)#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(100,200,300))
+print.benfords(c(100,200,300,5,6,7,3,5,4,5,7,8,1,5,7))
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212)#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569)#
+	stars <- c("","*","**","***")#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE])#
+	stat.table <- cbind(stat.table,Signif.level)#
+	print(stat.table,quote=FALSE)#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(100,200,300,5,6,7,3,5,4,5,7,8,1,5,7))
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212)#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569)#
+	stars <- c("","*","**","***")#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE])#
+	stat.table <- cbind(stat.table,Signif.level)#
+	print(stat.table,quote=FALSE)#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(100,200,300,5,6,7,3,5,4,5,7,8,1,5,7))
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212)#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569)#
+	stars <- c("","*","**","***")#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE])#
+	stat.table <- cbind(stat.table,Signif.level)#
+	print(stat.table,quote=TRUE)#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(100,200,300,5,6,7,3,5,4,5,7,8,1,5,7))
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212)#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569)#
+	stars <- c("","*","**","***")#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE])#
+	stat.table <- cbind(stat.table,Signif.level)#
+	print(stat.table,na.print="")#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(100,200,300,5,6,7,3,5,4,5,7,8,1,5,7))
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212)#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569)#
+	stars <- c("","*","**","***")#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE])#
+	stat.table <- cbind(stat.table,Signif.level)#
+	print(stat.table,quote=FALSE)#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(1,2,3))
+print.benfords <- function(votes.tot,statistic="both"){#
+	stat.list <- violations(votes.tot,"both")[-1]#
+	stat.table <- as.matrix(stat.list)#
+	colnames(stat.table) <- "Value"#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212)#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569)#
+	stars <- c(as.numeric(""),"*","**","***")#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE])#
+	stat.table <- cbind(stat.table,Signif.level)#
+	print(stat.table,quote=FALSE)#
+	cat("\n")#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+}
+print.benfords(c(1,2,3))
+print.benfords <- function(votes.tot,statistic="both"){ #By default, this function calculates both statistics#
+	stat.list <- violations(votes.tot,"both")[-1] #Excludes the first element of the list obtained from violations() because we do not need the digit distribution anymore#
+	stat.table <- as.matrix(stat.list) #Transforms the list to a matrix, which is more like a table#
+	colnames(stat.table) <- "Value" #Creates the column name#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212) #This logical vector identifies whether or not stat.table[1,1], which is the value of the Leemis' m statistic, matches with any of the critical values.#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569) #This logical vector identifies whether or not stat.table[2,1], which is the value of the Cho-Gains' d statistic, matches with any of the critical values.#
+	stars <- c("","*","**","***") #Creates a vector of stars, which will be used with objects m and d as below#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE]) #Creates a vector of stars that correspond to the location where object m is TRUE; that is, where a statistic corresponds to the critical values#
+	stat.table <- cbind(stat.table,Signif.level) #Adds the new variable "Signif.level" to the existing matrix#
+	print(stat.table,quote=FALSE) #Prints the resulting matrix without quotation marks around characters#
+	cat("\n") #Provides a line break#
+	cat("Significance level: 0.10*, 0.05**, 0.01***") #A line included to explain the stars#
+}
+violations <- function(votes.tot,statistic){#
+	#Argument "votes.tot" takes in a vector or matrix of observed vote totals#
+	#Argument "statistic" specifies the statistic you want to calculate as we will see below#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/length(votes.tot)#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m),d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}#
+#
+#2#
+print.benfords <- function(votes.tot,statistic="both"){ #By default, this function calculates both statistics#
+	stat.list <- violations(votes.tot)[-1] #Excludes the first element of the list obtained from violations() because we do not need the digit distribution anymore#
+	stat.table <- as.matrix(stat.list) #Transforms the list to a matrix, which is more like a table#
+	colnames(stat.table) <- "Value" #Creates the column name#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212) #This logical vector identifies which critical value, if any, stat.table[1,1], which is the value of the Leemis' m statistic, matches with.#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569) #This logical vector identifies which critical value, if any, stat.table[2,1], which is the value of the Cho-Gains' d statistic, matches with.#
+	stars <- c("","*","**","***") #Creates a vector of possible values of stars, which will be used with objects m and d as below#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE]) #Creates a vector of stars that correspond to the location where object m and d are TRUE; that is, where each statistic corresponds to the critical values#
+	stat.table <- cbind(stat.table,Signif.level) #Adds the new variable "Signif.level" to the existing matrix#
+	print(stat.table,quote=FALSE) #Prints the resulting matrix without quotation marks around characters#
+	cat("\n") #Provides a line break#
+	cat("Significance level: 0.10*, 0.05**, 0.01***") #A line included to explain what the stars mean#
+}
+print.benfords(c(1,2,3,4,5,6,2,3,4,1,9,7,8,8,8))
+print.benfords <- function(votes.tot,statistic="both"){ #By default, this function calculates both statistics#
+	stat.list <- violations(votes.tot,statistic)[-1] #Excludes the first element of the list obtained from violations() because we do not need the digit distribution anymore#
+	stat.table <- as.matrix(stat.list) #Transforms the list to a matrix, which is more like a table#
+	colnames(stat.table) <- "Value" #Creates the column name#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212) #This logical vector identifies which critical value, if any, stat.table[1,1], which is the value of the Leemis' m statistic, matches with.#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569) #This logical vector identifies which critical value, if any, stat.table[2,1], which is the value of the Cho-Gains' d statistic, matches with.#
+	stars <- c("","*","**","***") #Creates a vector of possible values of stars, which will be used with objects m and d as below#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE]) #Creates a vector of stars that correspond to the location where object m and d are TRUE; that is, where each statistic corresponds to the critical values#
+	stat.table <- cbind(stat.table,Signif.level) #Adds the new variable "Signif.level" to the existing matrix#
+	print(stat.table,quote=FALSE) #Prints the resulting matrix without quotation marks around characters#
+	cat("\n") #Provides a line break#
+	cat("Significance level: 0.10*, 0.05**, 0.01***") #A line included to explain what the stars mean#
+}
+print.benfords(c(1,2,3,4,5,6,2,3,4,1,9,7,8,8,8))
+print.benfords(c(1,2,3,4,5,6,2,3,4,1,9,7,8,8,8,8,8,8))
+violations <- function(votes.tot,statistic){#
+	#Argument "votes.tot" takes in a vector or matrix of observed vote totals#
+	#Argument "statistic" specifies the statistic you want to calculate as we will see below#
+	prop.freq <- numeric(9) #Creates a numeric vector of length nine#
+	for(i in 1:9){ #
+		prop.freq[i] <- sum((substr(votes.tot,start=1,stop=1)==i)*1)/length(votes.tot)#
+	} #For loops the vector "prop.freq" to contain proportional frequencies of integers in vote totals#
+	if(statistic=="both"){ #When you want both m and d statistics#
+		m <- numeric(9)#
+		for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+		d <- numeric(9)#
+		for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m),d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution#
+	}else{#
+		if(statistic=="Leemis"){ #When you only want m statistic#
+			m <- numeric(9)#
+			for(i in 1:9){#
+			m[i] <- abs(prop.freq[i]-log10(1+(1/i)))#
+		}#
+return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m))) #Returns a list of the m statistic and the full digit distribution#
+		}#
+		if(statistic=="Cho-Gains"){ #When you only want d statistic#
+			d <- numeric(9)#
+			for(i in 1:9){#
+			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2#
+		}#
+return(list(digit.distribution=prop.freq,d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns a list of the d statistic and the full digit distribution#
+	}#
+}#
+}#
+#
+#2#
+print.benfords <- function(votes.tot,statistic="both"){#
+	#By default, this function calculates both statistics#
+	stat.list <- violations(votes.tot,statistic)[-1]#
+	#Excludes the first element of the list obtained from violations() because we do not need the digit distribution anymore#
+	stat.table <- as.matrix(stat.list)#
+	#Transforms the list to a matrix, which is more like a table#
+	colnames(stat.table) <- "Value"#
+	#Creates the column name#
+	m <- c(stat.table[1,1]<0.851,stat.table[1,1]>=0.851&stat.table[1,1]<0.967,stat.table[1,1]>=0.967&stat.table[1,1]<1.212,stat.table[1,1]>=1.212)#
+	#This logical vector identifies which critical value, if any, stat.table[1,1], which is the value of the Leemis' m statistic, matches with.#
+	d <- c(stat.table[2,1]<1.212,stat.table[2,1]>=1.212&stat.table[2,1]<1.330,stat.table[2,1]>=1.330&stat.table[2,1]<1.569,stat.table[2,1]>=1.569)#
+	#This logical vector identifies which critical value, if any, stat.table[2,1], which is the value of the Cho-Gains' d statistic, matches with.#
+	stars <- c("","*","**","***")#
+	#Creates a vector of possible values of stars, which will be used with objects m and d as below#
+	Signif.level <- c(stars[m==TRUE],stars[d==TRUE])#
+	#Creates a vector of stars that correspond to the location where object m and d are TRUE; that is, where each statistic corresponds to the critical values#
+	stat.table <- cbind(stat.table,Signif.level)#
+	#Adds the new variable "Signif.level" to the existing matrix#
+	print(stat.table)#
+	#Prints the resulting matrix#
+	cat("\n")#
+	#Provides a line break#
+	cat("Significance level: 0.10*, 0.05**, 0.01***")#
+	#A line included to explain what the stars mean#
+}
+print.benfords(c(1,2,3,4,5,6,7,8,9,3,4,5,6,7,3,4,6,7,8,9))
