@@ -91,7 +91,7 @@ unittest.benfords <- function(){
 	benfords.data1 <- benfords(data1,"both")
 	#benfords.data1 is the output of data1 using benfords(), which is the subject of unit testing
 	data2 <- rep(seq(100,900,by=100),round(log10(1+(1/(9:1)))*100))
-	#data2 is artifical data that doesn't meet Benford's law
+	#data2 is artifical data that doesn't meet Benford's law because it is log10(1+(1/(9:1))), not log10(1+(1/(1:9)))
 	data2.distribution <- numeric(9)
 	for(i in 1:9){ 
 		data2.distribution[i] <- sum((substr(data2,start=1,stop=1)==i)*1)/length(data2)
@@ -123,9 +123,21 @@ unittest.benfords <- function(){
 		cat('Distribution for data1 wrong.\n')
 	}
 	if(any(benfords.data2[[1]]!=data2.distribution)==TRUE){
-		cat('Distribution for data2 wrong.')
+		cat('Distribution for data2 wrong.\n')
 	}
-	#If there is no perfect match, specifies what went wrong. Since I specified the benfords function to calculate both m and d statistics in the function argument, there is no need to consider errors in which the benfords function calculates only either one of the two statistics.
+	if((benfords.data1[[2]]!=data1.m)==TRUE){
+		cat('m statistic miscalculated.\n')
+	}
+	if((benfords.data2[[2]]!=data2.m)==TRUE){
+		cat('m statistic miscalculated.\n')
+	}
+	if((benfords.data1[[3]]!=data1.d)==TRUE){
+		cat('d statistic miscalculated.\n')
+	}
+	if((benfords.data2[[3]]!=data2.d)==TRUE){
+		cat('d statistic miscalculated.\n')
+	}
+	#If there is no perfect match, what went wrong is specified.
 }
 
 	
