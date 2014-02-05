@@ -21,7 +21,7 @@ benfords <- function(votes.tot,statistic){
 		for(i in 1:9){
 			d[i] <- (prop.freq[i]-log10(1+(1/i)))^2
 		}
-return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m),d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution
++return(list(digit.distribution=prop.freq,m.statistic=sqrt(length(votes.tot))*max(m),d.statistic=sqrt(length(votes.tot))*sqrt(sum(d)))) #Returns both statistics as list containing the full digit distribution
 	}else{
 		if(statistic=="Leemis"){ #When you only want m statistic
 			m <- numeric(9)
